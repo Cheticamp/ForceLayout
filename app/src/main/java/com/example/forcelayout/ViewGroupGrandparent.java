@@ -3,7 +3,6 @@ package com.example.forcelayout;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.LinearLayout;
 
 public class ViewGroupGrandparent extends LinearLayout {
@@ -24,35 +23,20 @@ public class ViewGroupGrandparent extends LinearLayout {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        ViewLog.logCall(TAG, ViewLog.GRANDPARENT_INDEX, 0x04, "onMeasure called");
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        logCall(0x04, "onMeasure called");
     }
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        ViewLog.logCall(TAG, ViewLog.GRANDPARENT_INDEX, 0x02, "onLayout called");
         super.onLayout(changed, left, top, right, bottom);
-        logCall(0x02, "onLayout called");
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
+        ViewLog.logCall(TAG, ViewLog.GRANDPARENT_INDEX, 0x01, "onDraw called");
         super.onDraw(canvas);
-        logCall(0x01, "onDraw called");
-    }
-
-    public void logCall(int flag, String text) {
-        if (mRecord) {
-            mFlags |= flag;
-            Log.i(TAG, text);
-        }
-    }
-
-    public int getFlags() {
-        return mFlags;
-    }
-
-    public void setRecord() {
-        mRecord = true;
     }
 
     private static final String TAG = "ViewGroupGrandparent";

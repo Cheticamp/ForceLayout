@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ViewLog.enableLogging(false);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
@@ -30,11 +31,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void resetContentView() {
+        ViewLog.enableLogging(false);
         if (mCombo > 0) {
             Log.i(TAG, getFlagString(mCombo, 6)
-                    + getFlagString(viewGroupGrandparent.getFlags(), 3)
-                    + getFlagString(viewGroupParent.getFlags(), 3)
-                    + getFlagString(childView.getFlags(), 3));
+                    + getFlagString(ViewLog.getFlags(ViewLog.GRANDPARENT_INDEX), 3)
+                    + getFlagString(ViewLog.getFlags(ViewLog.PARENT_INDEX), 3)
+                    + getFlagString(ViewLog.getFlags(ViewLog.CHILD_INDEX), 3));
         }
         setContentView(R.layout.activity_main);
         mLayout = (LinearLayout) findViewById(R.id.layout);
@@ -45,9 +47,7 @@ public class MainActivity extends AppCompatActivity {
         mLayout.post(new Runnable() {
             @Override
             public void run() {
-                viewGroupGrandparent.setRecord();
-                viewGroupParent.setRecord();
-                childView.setRecord();
+                ViewLog.enableLogging(true);
                 if (++mCombo < 64) {
                     testCombo(mCombo);
                 }
@@ -63,30 +63,29 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, combo + "*******************************************");
         doForce = combo & FORCELAYOUT_MASK;
         if (doForce != 0) {
-            if ((doForce & CHILD) != 0) {
+            if ((doForce & CHILD_FLAG) != 0) {
                 childView.forceLayout();
             }
-            if ((doForce & PARENT) != 0) {
+            if ((doForce & PARENT_FLAG) != 0) {
                 viewGroupParent.forceLayout();
             }
-            if ((doForce & GRANDPARENT) != 0) {
+            if ((doForce & GRANDPARENT_FLAG) != 0) {
                 viewGroupGrandparent.forceLayout();
             }
         }
 
         doLayout = combo >> 3;
         if (doLayout != 0) {
-            if ((doLayout & CHILD) != 0) {
+            if ((doLayout & CHILD_FLAG) != 0) {
                 childView.requestLayout();
             }
-            if ((doLayout & PARENT) != 0) {
+            if ((doLayout & PARENT_FLAG) != 0) {
                 viewGroupParent.requestLayout();
             }
-            if ((doLayout & GRANDPARENT) != 0) {
+            if ((doLayout & GRANDPARENT_FLAG) != 0) {
                 viewGroupGrandparent.requestLayout();
             }
         }
-
         // Do a new combination test after two seconds. That should be more than enough time
         // for the framework to cycle through what it needs to do.
         myHandler.postDelayed(new Runnable() {
@@ -109,9 +108,9 @@ public class MainActivity extends AppCompatActivity {
         return sb.toString();
     }
 
-    private static final int CHILD = 0x01;
-    private static final int PARENT = 0x02;
-    private static final int GRANDPARENT = 0x04;
+    private static final int CHILD_FLAG = 0x01;
+    private static final int PARENT_FLAG = 0x02;
+    private static final int GRANDPARENT_FLAG = 0x04;
     private static final int FORCELAYOUT_MASK = 0x07;
 
     private static final String TAG = "MainActivity";

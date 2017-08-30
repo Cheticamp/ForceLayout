@@ -3,7 +3,6 @@ package com.example.forcelayout;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 public class MyChildView extends View {
@@ -25,35 +24,35 @@ public class MyChildView extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        String text = "onMeasure called (" + getTag() + ")";
+        if (getId() == R.id.child_view1) {
+            ViewLog.logCall(TAG, ViewLog.CHILD_INDEX, 0x04, text);
+        } else {
+            ViewLog.logCall(TAG, text);
+        }
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-       logCall(0x04, "onMeasure called");
     }
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        String text = "onLayout called (" + getTag() + ")";
+        if (getId() == R.id.child_view1) {
+            ViewLog.logCall(TAG, ViewLog.CHILD_INDEX, 0x02, text);
+        } else {
+            ViewLog.logCall(TAG, text);
+        }
         super.onLayout(changed, left, top, right, bottom);
-        logCall(0x02, "onLayout called");
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        logCall(0x01, "onDraw called");
-    }
-
-    public void logCall(int flag, String text) {
-        if (mRecord) {
-            mFlags |= flag;
-            Log.i(TAG, text);
+        String text = "onDraw called (" + getTag() + ")";
+        if (getId() == R.id.child_view1) {
+            ViewLog.logCall(TAG, ViewLog.CHILD_INDEX, 0x01, text);
+        } else {
+            ViewLog.logCall(TAG, text);
         }
-    }
-
-    public int getFlags() {
-        return mFlags;
-    }
-
-    public void setRecord() {
-        mRecord = true;
+        super.onDraw(canvas);
     }
 
     private static final String TAG = "MyChildView";

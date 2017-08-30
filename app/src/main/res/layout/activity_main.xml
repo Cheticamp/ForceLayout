@@ -23,7 +23,15 @@
                 android:id="@+id/child_view1"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:background="@color/colorPrimary" />
+                android:background="@color/colorPrimary"
+                android:tag="1" />
+
+            <com.example.forcelayout.MyChildView
+                android:id="@+id/child_view2"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@color/colorAccent"
+                android:tag="2" />
         </com.example.forcelayout.ViewGroupParent>
     </com.example.forcelayout.ViewGroupGrandparent>
 
