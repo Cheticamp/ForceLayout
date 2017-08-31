@@ -25,7 +25,7 @@ import android.widget.TextView;
  * size. A change in the width of the table forces a remeasurement and makes forceLayout() moot.
  * To test this, set the width of the table layout to "wrap_contents".
  * <p>
- * Comapanion files: activity_main.xml, MyTableRow.java. Tested on API 25.
+ * Comapanion file: activity_main.xml. Tested on API 25.
  */
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
