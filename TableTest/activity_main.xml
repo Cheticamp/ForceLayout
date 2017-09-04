@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:layout_margin="16dp"
     android:orientation="vertical"
     tools:context="com.example.tabletest.MainActivity">
 
@@ -11,7 +11,8 @@
         android:id="@+id/tableLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_green_light">
+        android:background="@android:color/holo_green_light"
+        android:shrinkColumns="*">
 
         <com.example.tabletest.MyTableRow
             android:id="@+id/row1"
@@ -19,18 +20,34 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary">
 
-            <TextView
-                android:id="@+id/textView1"
+            <EditText
+                android:id="@+id/editText1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/colorAccent"
-                android:text="Row 1, Col 1" />
+                android:background="@color/colorPrimary"
+                android:inputType="text"
+                android:padding="8dp"
+                android:text="Edit any cell"
+                android:textColor="@android:color/white" />
 
-            <TextView
+            <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/colorAccent"
-                android:text="Row 1, Col 2" />
+                android:background="@android:color/holo_orange_light"
+                android:inputType="text"
+                android:padding="8dp"
+                android:text="R1 C2"
+                android:textColor="@android:color/white" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:inputType="text"
+                android:padding="8dp"
+                android:text="R1 C3"
+                android:textColor="@android:color/white" />
         </com.example.tabletest.MyTableRow>
 
         <com.example.tabletest.MyTableRow
@@ -38,20 +55,36 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:background="@color/colorPrimary">
 
-            <TextView
+            <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/colorAccent"
-                android:text="Row 2, Col 1" />
+                android:background="@color/colorPrimary"
+                android:inputType="text"
+                android:padding="8dp"
+                android:text="R2 C1"
+                android:textColor="@android:color/white" />
 
-            <TextView
+            <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/colorAccent"
-                android:text="Row 2, Col 2" />
+                android:background="@android:color/holo_orange_light"
+                android:inputType="text"
+                android:padding="8dp"
+                android:text="R2 C2"
+                android:textColor="@android:color/white" />
 
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:inputType="text"
+                android:padding="8dp"
+                android:text="R2 C3"
+                android:textColor="@android:color/white" />
         </com.example.tabletest.MyTableRow>
     </TableLayout>
 
@@ -59,15 +92,9 @@
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="32dp"
         android:checked="false"
-        android:text="Disable forceLayout()\nfor bottom row" />
-
-    <Button
-        android:id="@+id/grow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Grow" />
+        android:text="Disable forceLayout()\nfor table" />
 
 </LinearLayout>
